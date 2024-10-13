@@ -1,0 +1,6 @@
+*
+!src/
+!Pipfile
+!pro.env
+!start.sh
+!version

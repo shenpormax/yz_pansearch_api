@@ -1,0 +1,23 @@
+meta {
+  name: get_kk
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{api}}/v1/search/get_kk
+  body: json
+  auth: none
+}
+
+headers {
+  APP-ID: yz_pansearch_api
+  APP-TOKEN: 123456
+  PAN-TYPE: quark;baidu
+}
+
+body:json {
+  {
+    "kw": "七龙珠"
+  }
+}

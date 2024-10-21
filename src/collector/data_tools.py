@@ -1,6 +1,7 @@
 """
     Created by fre123 at 2024-10-11.
     Description: 数据处理模块
+    PIPENV_DOTENV_LOCATION=./.env pipenv run python ./src/collector/data_tools.py
     Changelog: all notable changes to this file will be documented
 """
 

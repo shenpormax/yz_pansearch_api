@@ -17,7 +17,7 @@
 ```shell
 docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped \
 -e APP_TOKEN=设置 token \
--e REDIS_HOST=Redis 用户名 \
+-e REDIS_HOST=Redis Host \
 -e REDIS_PORT=Redis 端口 \
 -e REDIS_PASSWORD=Redis 密码 \
 -e REDIS_DB=11 \

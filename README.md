@@ -56,10 +56,16 @@ curl --request POST \
         "description": "",
         "res_dict": {
           "quark": [
-            "https://pan.quark.cn/s/xxx"
+            {
+              "url": "https://pan.quark.cn/s/856e709b3ae7",
+              "code": ""
+            }
           ],
           "baidu": [
-            "https://pan.baidu.com/s/xxx"
+            {
+              "url": "https://pan.baidu.com/s/1wXAwg439J0XLKlGwxmjJSg",
+              "code": "4qhw"
+            }
           ]
         }
       }

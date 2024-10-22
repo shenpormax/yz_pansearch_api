@@ -24,7 +24,12 @@ def get_quark_url_by_txt(source_txt: str) -> str:
     if clean_urls:
         for each_url in clean_urls:
             each_url = f"https://{each_url.strip()}"
-            url_list.append(each_url)
+            url_list.append(
+                {
+                    "url": each_url,
+                    "code": "",
+                }
+            )
     return url_list
 
 
@@ -77,5 +82,5 @@ def get_share_url_token(quark_url: str) -> dict:
 
 
 if __name__ == "__main__":
-    quark_url = "https://pan.quark.cn/s/28df90b93605?entry=sjss#/list/share"
+    quark_url = "https://pan.quark.cn/s/7d234b9cb446"
     print(get_share_url_token(quark_url))

@@ -7,18 +7,28 @@
 import re
 
 
-def get_baidu_url_by_txt(source_txt: str) -> str:
+def get_baidu_url_by_txt(source_txt: str) -> list:
     """
-    从文本中提取 url
+    从文本中提取百度网盘的链接和提取码
     Args:
         source_txt (str): 文本
+    Returns:
+        list: 包含链接和提取码的字典列表
     """
-    url_list = []
-    clean_urls = re.findall(r"https://pan\.baidu\.com/s/\w+(?:\?pwd=\w+)?", source_txt)
-    if clean_urls:
-        for each_url in clean_urls:
-            url_list.append(each_url.strip())
-    return url_list
+    result = []
+    # 匹配 baidu.com 网盘完整链接和提取码
+    pattern = re.compile(
+        r"(https://pan\.baidu\.com/s/[a-zA-Z0-9\-]+(?:\?pwd=[a-zA-Z0-9]+)?)\s*提取码[:：\s]*([a-zA-Z0-9]+)?"
+    )
+
+    matches = pattern.findall(source_txt)
+
+    for match in matches:
+        url = match[0]
+        code = match[1] if match[1] else None
+        result.append({"url": url, "code": code})
+
+    return result
 
 
 if __name__ == "__main__":

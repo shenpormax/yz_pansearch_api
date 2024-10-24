@@ -21,20 +21,8 @@ def create_app():
     flask_app = Flask(__name__)
 
     with flask_app.app_context():
-        from src.databases import MongodbBase, MongodbManager, RedisBase, RedisManager
-
-        # 初始化 MongoDB
-        # mongodb_base: MongodbBase = MongodbManager.get_mongo_base(
-        #     mongodb_config=Config.MONGODB_CONFIG
-        # )
-        # 初始化 Redis
-        redis_base: RedisBase = RedisManager.get_redis_base(
-            redis_config=Config.REDIS_CONFIG
-        )
         # 项目内部配置
         flask_app.config["app_config"] = Config
-        # flask_app.config["mongodb_base"] = mongodb_base
-        flask_app.config["redis_base"] = redis_base
         flask_app.config["app_logger"] = LOGGER
         flask_app.config["MAX_CONTENT_LENGTH"] = 32 * 1024 * 1024
         # 全局请求 session

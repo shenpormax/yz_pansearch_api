@@ -17,13 +17,14 @@
 ```shell
 docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped \
 -e APP_TOKEN=设置 token \
--e REDIS_HOST=Redis Host \
--e REDIS_PORT=Redis 端口 \
--e REDIS_PASSWORD=Redis 密码 \
--e REDIS_DB=11 \
--e REDIS_CACHE_TTL=600 \
+-e CACHE_TTL=604800 \
 howie6879/yz_pansearch_api:http-v0.1.0
 ```
+
+环境变量解释：
+
+- APP_TOKEN：搭建完成后你自己访问的密钥 Token
+- CACHE_TTL：缓存时间，单位秒，默认 604800 秒（7 天）
 
 目前支持的源有：
 
@@ -43,6 +44,16 @@ curl --request POST \
   "kw": "xx"
 }'
 ```
+
+关于请求 Header 头字段解释：
+
+- APP-ID：固定值 `yz_pansearch_api`
+- APP-TOKEN：你启动服务自己设置的 Token
+- PAN-TYPE：网盘类型，取决于目标源支持哪些网盘，目前支持：
+  - quark
+  - baidu
+  - xunlei
+- IS-CACHE：是否使用缓存，取值 `1` 或 `0`，默认 `1`
 
 返回格式（符合元站官方标准即可）：
 
@@ -75,6 +86,10 @@ curl --request POST \
   "status": 0
 }
 ```
+
+关于如何集成到元站，进入**插件列表**，点击**全网搜**插件：
+
+![全网搜案例](https://img.fre123.com/i/2024/10/24/671a4ea498e7f.png)
 
 ## 开发
 

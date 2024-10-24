@@ -6,7 +6,7 @@
 
 import os
 
-WORKERS = int(os.getenv("WORKERS", 2))
+WORKERS = int(os.getenv("WORKERS", 1))
 MAX_REQUEST = int(os.getenv("MAX_REQUEST", 100000))
 PORT = int(os.getenv("PORT", 8067))
 

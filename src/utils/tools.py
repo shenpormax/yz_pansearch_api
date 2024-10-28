@@ -6,6 +6,25 @@
 
 import hashlib
 
+from urllib.parse import urlparse
+
+
+def extract_domain(url: str) -> str:
+    """
+    提取域名名称
+    Args:
+        url (_type_): 目标 url
+
+    Returns:
+        _type_:  域名主体
+    """
+    parsed_url = urlparse(url)
+    if ".com.cn" in parsed_url.netloc:
+        domain = parsed_url.netloc.split(".")[-3]
+    else:
+        domain = parsed_url.netloc.split(".")[-2]
+    return domain
+
 
 def md5_encryption(string: str) -> str:
     """

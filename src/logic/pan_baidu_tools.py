@@ -1,6 +1,6 @@
 """
-    Created by howie.hu at 2024-10-11.
-    Description: 
+    Created by fre123 at 2024-10-11.
+    Description: 百度网盘常用工具
     Changelog: all notable changes to this file will be documented
 """
 

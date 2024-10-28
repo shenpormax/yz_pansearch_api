@@ -5,12 +5,46 @@
     Changelog: all notable changes to this file will be documented
 """
 
+import concurrent.futures
 import json
 import random
 
 import requests
 
 from src.collector import data_config
+from src.config import LOGGER
+
+
+def check_url(url: str, resp_status_list: list) -> tuple:
+    """
+    检查url是否有效
+    # [200, 301, 302, 303, 304, 307, 308, 403]
+    """
+    resp_status_list = resp_status_list or [200]
+    try:
+        res = requests.get(url, timeout=5)
+        if res.status_code == 200:
+            return url, True
+    except Exception as e:
+        LOGGER.error(f"URL: {url} 链接检测失败，原因：{str(e)}")
+    return url, False
+
+
+def check_urls(urls: list, resp_status_list: list) -> list:
+    """
+    批量检查url是否有效
+    """
+    valid_urls = []
+    resp_status_list = resp_status_list or [200]
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = {
+            executor.submit(check_url, url, resp_status_list): url for url in urls
+        }
+        for future in concurrent.futures.as_completed(futures):
+            url, is_valid = future.result()
+            if is_valid:
+                valid_urls.append(url)
+    return valid_urls
 
 
 def get_by_proxy(

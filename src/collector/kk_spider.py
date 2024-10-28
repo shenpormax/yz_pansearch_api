@@ -4,7 +4,7 @@
     Changelog: all notable changes to this file will be documented
 """
 
-from urllib.parse import urlparse
+import concurrent.futures
 
 from src.collector import REQ_SESSION, data_config
 from src.common.remote import send_get_request, send_post_request
@@ -110,20 +110,24 @@ def start(kw: str, proxy_model: int = 0) -> dict:
     kk_url_list = Config.SOURCE_CONFIG["kk"]
     # kk_url_list = ["http://m.kkqws.com"]
     for kk_url in kk_url_list:
-        LOGGER.info(f"KK Spider 请求 {kk_url} 资源通道")
-        for kk_channel in ["kk", "xy", "jz"]:
-            spider_data = get_kk_data(kw=kw, kk_url=kk_url, kk_channel=kk_channel)
-            if proxy_model:
-                spider_data = spider_data or get_kk_data(
-                    kw=kw, kk_url=kk_url, kk_channel=kk_channel, proxy_model=1
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = []
+            LOGGER.info(f"KK Spider 请求 {kk_url} 资源通道")
+            for kk_channel in ["kk", "xy", "jz"]:
+                futures.append(
+                    executor.submit(get_kk_data, kw, kk_url, kk_channel, proxy_model)
                 )
-            result.update(spider_data)
-        if result:
-            break
+            for future in concurrent.futures.as_completed(futures):
+                spider_data = future.result()
+                if spider_data:
+                    result.update(spider_data)
+
+            if result:
+                break
 
     return result
 
 
 if __name__ == "__main__":
-    res = start(kw="边水往事", proxy_model=1)
+    res = start(kw="边水往事", proxy_model=0)
     print(res)

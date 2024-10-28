@@ -26,6 +26,11 @@ class Config:
     WORKERS = os.getenv("WORKERS", 1)
 
     APP_ID_CONFIG = {"yz_pansearch_api": os.getenv("APP_TOKEN", "123456")}
+    SOURCE_CONFIG = {
+        "kk": os.getenv(
+            "SOURCE_KK", "http://z.kkkob.com;http://s.kkkob.com;http://m.kkqws.com"
+        ).split(";"),
+    }
     CACHE_DATA = {}
     CACHE_TTL = os.getenv("CACHE_TTL", 604800)
 

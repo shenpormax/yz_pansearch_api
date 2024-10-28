@@ -1,10 +1,8 @@
 """
     Created by fre123 at 2024-10-11.
-    Description: 示例接口说明
+    Description: 获取 KK 资源
     Changelog: all notable changes to this file will be documented
 """
-
-import json
 
 from flask import current_app, request
 

@@ -28,8 +28,10 @@ howie6879/yz_pansearch_api:http-v0.1.0
 
 目前支持的源有：
 
-- kk: http://z.kkkob.com/
-- 更多支持中
+- kk: 偏向最新剧集更新
+- pansearch: 资源比较齐全
+- dj: 短剧为主
+- 更多资源可提交 PR 兼容
 
 启动成功后，通过 `http://ip:8067`，curl 的请求示例如下：
 

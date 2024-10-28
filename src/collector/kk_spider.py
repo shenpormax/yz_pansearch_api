@@ -4,12 +4,14 @@
     Changelog: all notable changes to this file will be documented
 """
 
+from urllib.parse import urlparse
+
 from src.collector import REQ_SESSION, data_config
 from src.common.remote import send_get_request, send_post_request
-from src.config import LOGGER
+from src.config import LOGGER, Config
 
 
-def get_token(proxy_model: int = 0) -> str:
+def get_token(token_url: str, proxy_model: int = 0) -> str:
     """
     获取token
     """
@@ -29,7 +31,7 @@ def get_token(proxy_model: int = 0) -> str:
     else:
         proxy = {}
     resp = send_get_request(
-        url="http://z.kkkob.com/v/api/getToken",
+        url=f"{token_url}/v/api/getToken",
         headers=headers,
         req_session=REQ_SESSION,
         timeout=10,
@@ -42,23 +44,24 @@ def get_token(proxy_model: int = 0) -> str:
     return token
 
 
-def get_kk_data(kw: str, kk_channel: str, proxy_model: int = 0) -> dict:
+def get_kk_data(kw: str, kk_url, kk_channel: str, proxy_model: int = 0) -> dict:
     """
     获取kk数据
     """
-    token = get_token()
+    token = get_token(token_url=kk_url)
     if proxy_model:
-        token = token or get_token(proxy_model=1)
+        token = token or get_token(token_url=kk_url, proxy_model=1)
+
     kk_channel_map = {
-        "kk": "http://z.kkkob.com/v/api/search",
-        "xy": "http://z.kkkob.com/v/api/getXiaoyu",
-        "dj": "http://z.kkkob.com/v/api/getDJ",
-        "jz": "http://z.kkkob.com/v/api/getJuzi",
+        "kk": f"{kk_url}/v/api/search",
+        "xy": f"{kk_url}/v/api/getXiaoyu",
+        "dj": f"{kk_url}/v/api/getDJ",
+        "jz": f"{kk_url}/v/api/getJuzi",
     }
     headers = {
         **data_config.SPIDER_CONFIG["REQUEST_HEADERS"],
         **{
-            "Origin": "http://z.kkkob.com",
+            "Origin": kk_url,
             "Content-Type": "application/json",
         },
     }
@@ -74,6 +77,7 @@ def get_kk_data(kw: str, kk_channel: str, proxy_model: int = 0) -> dict:
     else:
         proxy = {}
     data = {"name": kw, "token": token}
+    LOGGER.info(f"KK Spider 请求 {kk_channel} 资源通道: {kk_channel_map[kk_channel]}")
     resp = send_post_request(
         url=kk_channel_map[kk_channel],
         headers=headers,
@@ -103,13 +107,20 @@ def start(kw: str, proxy_model: int = 0) -> dict:
     """
     # 抓取 kk_channel 为 kk 和 xy 的数据
     result = {}
-    for kk_channel in ["kk", "xy", "jz"]:
-        spider_data = get_kk_data(kw=kw, kk_channel=kk_channel)
-        if proxy_model:
-            spider_data = spider_data or get_kk_data(
-                kw=kw, kk_channel=kk_channel, proxy_model=1
-            )
-        result.update(spider_data)
+    kk_url_list = Config.SOURCE_CONFIG["kk"]
+    # kk_url_list = ["http://m.kkqws.com"]
+    for kk_url in kk_url_list:
+        LOGGER.info(f"KK Spider 请求 {kk_url} 资源通道")
+        for kk_channel in ["kk", "xy", "jz"]:
+            spider_data = get_kk_data(kw=kw, kk_url=kk_url, kk_channel=kk_channel)
+            if proxy_model:
+                spider_data = spider_data or get_kk_data(
+                    kw=kw, kk_url=kk_url, kk_channel=kk_channel, proxy_model=1
+                )
+            result.update(spider_data)
+        if result:
+            break
+
     return result
 
 

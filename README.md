@@ -63,7 +63,7 @@ curl --request POST \
 {
   "data": {
     "total": 1,
-    "data": [
+    "rows": [
       {
         "title": "七龙珠",
         "description": "",

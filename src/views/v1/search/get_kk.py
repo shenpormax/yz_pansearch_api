@@ -90,7 +90,7 @@ def get_kk():
                 **{
                     ResponseField.DATA: {
                         "total": len(target_data),
-                        "data": target_data,
+                        "rows": target_data,
                     }
                 },
             }

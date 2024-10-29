@@ -5,6 +5,7 @@
 """
 
 import concurrent.futures
+import random
 
 from src.collector import REQ_SESSION, data_config
 from src.common.remote import send_get_request, send_post_request
@@ -92,7 +93,9 @@ def get_kk_data(kw: str, kk_url, kk_channel: str, proxy_model: int = 0) -> dict:
         else:
             # 抓取成功，但是目标服务器返回失败，考虑使用代理抓取
             result = {}
-            LOGGER.error(f"KK Spider 请求 {kk_channel} 资源通道成功，但结果不对: {resp['resp_data']}")
+            LOGGER.error(
+                f"KK Spider 请求 {kk_channel} 资源通道成功，但结果不对: {resp['resp_data']}"
+            )
     else:
         result = {}
         LOGGER.error(f"KK Spider 请求 {kk_channel} 资源通道失败: {resp['resp_data']}")
@@ -107,6 +110,8 @@ def start(kw: str, proxy_model: int = 0) -> dict:
     result = {}
     kk_url_list = Config.SOURCE_CONFIG["kk"]
     # kk_url_list = ["http://m.kkqws.com"]
+    # 对 kk_url_list 随机打乱
+    random.shuffle(kk_url_list)
     for kk_url in kk_url_list:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = []

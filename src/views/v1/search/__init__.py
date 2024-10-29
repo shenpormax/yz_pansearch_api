@@ -4,4 +4,6 @@
     Changelog: all notable changes to this file will be documented
 """
 
+from .get_dj import get_dj
 from .get_kk import get_kk
+from .get_pansearch import get_pansearch

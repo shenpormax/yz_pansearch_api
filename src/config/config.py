@@ -39,7 +39,7 @@ class Config:
         ).split(";"),
     }
     CACHE_DATA = {}
-    CACHE_TTL = os.getenv("CACHE_TTL", 604800)
+    CACHE_TTL = int(os.getenv("CACHE_TTL", 604800))
 
     TAG = {
         "info": f"{PROJECT_NAME.replace('_', '-')}-info",

@@ -13,6 +13,7 @@ MarkupSafe = "==2.1.1"
 Jinja2 = "==3.1.2"
 requests = "*"
 redis = "*"
+lxml = "*"
 
 [dev-packages]
 pytest = "*"

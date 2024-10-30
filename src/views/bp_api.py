@@ -7,10 +7,14 @@
 from flask import Blueprint
 
 from src.views.v1.ping import ping
-from src.views.v1.search import get_kk
+from src.views.v1.search import get_dj, get_kk, get_pansearch
 
 bp_api = Blueprint("bp_api", __name__)
 version = "/v1"
 
 bp_api.add_url_rule(f"{version}/ping", view_func=ping, methods=["GET"])
 bp_api.add_url_rule(f"{version}/search/get_kk", view_func=get_kk, methods=["POST"])
+bp_api.add_url_rule(f"{version}/search/get_dj", view_func=get_dj, methods=["POST"])
+bp_api.add_url_rule(
+    f"{version}/search/get_pansearch", view_func=get_pansearch, methods=["POST"]
+)

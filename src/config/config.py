@@ -26,13 +26,20 @@ class Config:
     WORKERS = os.getenv("WORKERS", 1)
 
     APP_ID_CONFIG = {"yz_pansearch_api": os.getenv("APP_TOKEN", "123456")}
+    DOMAIN_NAME_MAP = {
+        "quark": "夸克",
+        "baidu": "百度",
+        "xunlei": "迅雷",
+        "alipan": "阿里",
+        "aliyundrive": "阿里",
+    }
     SOURCE_CONFIG = {
         "kk": os.getenv(
             "SOURCE_KK", "http://z.kkkob.com;http://s.kkkob.com;http://m.kkqws.com"
         ).split(";"),
     }
     CACHE_DATA = {}
-    CACHE_TTL = os.getenv("CACHE_TTL", 604800)
+    CACHE_TTL = int(os.getenv("CACHE_TTL", 604800))
 
     TAG = {
         "info": f"{PROJECT_NAME.replace('_', '-')}-info",

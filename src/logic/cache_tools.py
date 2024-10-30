@@ -1,5 +1,5 @@
 """
-    Created by howie.hu at 2024-10-24.
+    Created by fre123 at 2024-10-24.
     Description: 内存缓存逻辑
     Changelog: all notable changes to this file will be documented
 """
@@ -35,7 +35,10 @@ def set_cache(key: str, value: dict, expire: int = 0):
     try:
         if expire == 0:
             expire = 365 * 24 * 60 * 60
-        Config.CACHE_DATA[key] = {"data": value, "expire": int(time.time()) + expire}
+        Config.CACHE_DATA[key] = {
+            "data": value,
+            "expire": int(time.time()) + int(expire),
+        }
         exec_status = True
     except Exception as e:
         LOGGER.error(f"set_cache {key}-{value}-{expire} error: {e}")

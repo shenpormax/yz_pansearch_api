@@ -1,10 +1,11 @@
 """
-    Created by howie.hu at 2024-09-11.
+    Created by fre123 at 2024-09-11.
     Description: http://z.kkkob.com/app/index.html 抓取数据
     Changelog: all notable changes to this file will be documented
 """
 
 import concurrent.futures
+import random
 
 from src.collector import REQ_SESSION, data_config
 from src.common.remote import send_get_request, send_post_request
@@ -109,6 +110,8 @@ def start(kw: str, proxy_model: int = 0) -> dict:
     result = {}
     kk_url_list = Config.SOURCE_CONFIG["kk"]
     # kk_url_list = ["http://m.kkqws.com"]
+    # 对 kk_url_list 随机打乱
+    random.shuffle(kk_url_list)
     for kk_url in kk_url_list:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = []

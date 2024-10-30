@@ -23,7 +23,7 @@ howie6879/yz_pansearch_api:http-v0.1.0
 
 环境变量解释：
 
-- APP_TOKEN：搭建完成后你自己访问的密钥 Token
+- APP_TOKEN：搭建完成后你自己访问的密钥 Token，根据自己喜好填写
 - CACHE_TTL：缓存时间，单位秒，默认 604800 秒（7 天）
 
 目前支持的源有：
@@ -63,7 +63,7 @@ curl --request POST \
 {
   "data": {
     "total": 1,
-    "data": [
+    "rows": [
       {
         "title": "七龙珠",
         "description": "",

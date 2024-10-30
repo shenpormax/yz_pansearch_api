@@ -42,13 +42,7 @@ def parse_page_data(html_content):
             else None
         )
         url = item.xpath(".//a/@href")[0]
-        data_list.append(
-            {
-                "title": title,
-                "description": description,
-                "res_dict": {"quark": [{"url": url, "code": ""}]},
-            }
-        )
+        data_list.append({"title": title, "description": description, "url": url})
 
     return data_list
 
@@ -89,6 +83,6 @@ def run_spider(kw: str, proxy_model: int = 0):
 if __name__ == "__main__":
     from pprint import pprint
 
-    data = run_spider("海贼王")
+    data = run_spider("斗罗大", proxy_model=1)
     if data:
         pprint(data)

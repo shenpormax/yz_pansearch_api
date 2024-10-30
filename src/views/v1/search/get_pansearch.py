@@ -9,6 +9,8 @@ from src.collector import pansearch_spider
 from src.common import ResponseField, UniResponse, response_handle, token_required
 from src.config import LOGGER, Config
 from src.logic.cache_tools import get_cache, set_cache
+from src.logic.pan_baidu_tools import get_baidu_url_by_txt
+from src.logic.pan_quark_tools import get_quark_url_by_txt, get_share_url_token
 from src.utils import md5_encryption
 
 
@@ -23,6 +25,10 @@ def get_pansearch():
     proxy_model = request.headers.get("PROXY-MODEL", 0)
     # 默认开启缓存
     is_cache = request.headers.get("IS-CACHE", "1")
+    # 默认提取夸克链接
+    pan_type = request.headers.get("PAN-TYPE", "quark")
+    check_pan_url = request.headers.get("CHECK-PAN-URL", "1")
+    pan_type_list = pan_type.lower().strip().split(";")
 
     # 获取基础数据
     post_data: dict = request.json
@@ -41,7 +47,38 @@ def get_pansearch():
             spider_data = pansearch_spider.run_spider(kw, proxy_model)
             target_data = []
             if spider_data:
-                target_data = spider_data
+                for res in spider_data:
+                    res_dict = {}
+                    for each_pan_type in pan_type_list:
+                        res_answer = res.get("url", "")
+                        if each_pan_type == "quark":
+                            quark_url_list = get_quark_url_by_txt(res_answer)
+                            c_quark_url_list = []
+                            if check_pan_url == "1":
+                                for each_pan_url in quark_url_list:
+                                    quark_url_check_resp = get_share_url_token(
+                                        quark_url=each_pan_url["url"]
+                                    )
+                                    if quark_url_check_resp.get("is_valid"):
+                                        c_quark_url_list.append(each_pan_url)
+                            else:
+                                c_quark_url_list = quark_url_list
+                            if c_quark_url_list:
+                                res_dict[each_pan_type] = c_quark_url_list
+                        elif each_pan_type == "baidu":
+                            baidu_url_list = get_baidu_url_by_txt(res_answer)
+                            if baidu_url_list:
+                                res_dict[each_pan_type] = baidu_url_list
+                        else:
+                            pass
+                    if res_dict:
+                        target_data.append(
+                            {
+                                "title": res.get("title", ""),
+                                "description": "",
+                                "res_dict": res_dict,
+                            }
+                        )
             else:
                 # 数据抓取失败
                 app_logger.error(f"数据抓取失败( pansearch 源，请考虑使用代理)，kw: {kw}")

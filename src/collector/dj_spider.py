@@ -49,5 +49,5 @@ def get_dj_data(kw: str, proxy_model: int = 0) -> str:
 if __name__ == "__main__":
     from pprint import pprint
 
-    res = get_dj_data(kw="机fdsafew", proxy_model=0)
+    res = get_dj_data(kw="机", proxy_model=1)
     pprint(res)

@@ -28,25 +28,40 @@ def extract_pan_links_by_txt(source_txt: str) -> list:
             if url:
                 try:
                     target_domain = extract_domain(url)
-                    target_name = Config.DOMAIN_NAME_MAP.get(
-                        target_domain, target_domain
+                    target_name = Config.DOMAIN_NAME_MAP[target_domain]
+                    result.append(
+                        {
+                            "target_name": target_name,
+                            "target_url": url.replace("/n", "").replace(" ", ""),
+                            "target_mark": code.replace("/n", "").replace(" ", ""),
+                        }
                     )
                 except Exception as _:
                     target_name = "未知"
-                result.append(
-                    {
-                        "target_name": target_name,
-                        "target_url": url.replace("/n", "").replace(" ", ""),
-                        "target_mark": code.replace("/n", "").replace(" ", ""),
-                    }
-                )
 
     return result
 
 
-
 if __name__ == "__main__":
-    txt = """"我用夸克网盘分享了「2024抖音、小红书违禁词汇总.pdf」，点击链接即可保存。打开「夸克APP」在线查看，支持多种文档格式转换。
-链接：https://pan.quark.cn/s/4f4b518f8519提取码：9NdY"""
+    txt = """"image
+1、斗罗大陆218:https://www.aliyundrive.com/s/yTx4nqJGvJn;
+
+2、斗罗大陆:https://www.aliyundrive.com/s/xomaTkMsoLm;
+
+3、斗罗大陸漫画合集:https://www.aliyundrive.com/s/QtWX95Q8iCt;
+
+4、斗罗:https://www.aliyundrive.com/s/zPvMZLwBRKo;
+
+5、斗罗之万相斗罗:https://pan.quark.cn/s/ce0e60cd3f19;
+
+6、斗罗大陆4终极斗罗:https://www.aliyundrive.com/s/EQuw58aUeC8;
+
+7、斗罗大陆4终极斗罗:https://www.aliyundrive.com/s/PbEhWBoxN2K;
+
+8、斗罗大陆4终极斗罗:https://www.aliyundrive.com/s/ei8pm14UEht;
+
+9、斗罗大帝:https://pan.quark.cn/s/a5c5a132a897;
+
+10、斗罗大陆4终极斗罗txt:https://www.alipan.com/s/xLY3By12UkG;"""
 
     print(extract_pan_links_by_txt(txt))

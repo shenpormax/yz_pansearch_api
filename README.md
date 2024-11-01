@@ -30,7 +30,9 @@ docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e A
 - dj: 短剧为主
 - 更多资源可提交 PR 兼容
 
-启动成功后，通过 `http://ip:8067`，curl 的请求示例如下：
+启动成功后，通过浏览器访问 `http://ip:8067`，出现：Not Found 说明启动成功，如果无法访问，请检查服务器防火墙端口是否开放。
+
+终端 curl 的请求示例如下：
 
 ```shell
 curl --request POST \

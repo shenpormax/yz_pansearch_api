@@ -30,7 +30,7 @@ def get_dj_data(kw: str, proxy_model: int = 0) -> str:
     else:
         proxy = {}
     resp = send_get_request(
-        url=f"https://soju.ee/api/search?page_no=1&page_size=50&title={kw}",
+        url=f"https://soju.ee/api/search?page_no=1&page_size=10&title={kw}",
         headers=headers,
         req_session=REQ_SESSION,
         timeout=10,

@@ -92,6 +92,13 @@ curl --request POST \
 
 ![全网搜案例](https://img.fre123.com/i/2024/10/24/671a4ea498e7f.png)
 
+请求头配置你需要填的：
+
+- Content-Type: application/json
+- APP-ID: yz_pansearch_api
+- APP-TOKEN: 你启动服务自己设置的 Token
+- PAN-TYPE: quark
+
 ## 开发
 
 ```shell

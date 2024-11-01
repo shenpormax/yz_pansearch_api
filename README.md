@@ -15,7 +15,7 @@
 直接基于 Docker 部署：
 
 ```shell
-docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token CACHE_TTL=604800 howie6879/yz_pansearch_api:http-v0.1.0
+docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=604800 howie6879/yz_pansearch_api:http-v0.1.0
 ```
 
 环境变量解释：

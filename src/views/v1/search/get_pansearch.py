@@ -3,6 +3,7 @@
     Description: 获取 pansearch 资源
     Changelog: all notable changes to this file will be documented
 """
+
 from flask import current_app, request
 
 from src.collector import pansearch_spider
@@ -81,14 +82,16 @@ def get_pansearch():
                         )
             else:
                 # 数据抓取失败
-                app_logger.error(f"数据抓取失败( pansearch 源，请考虑使用代理)，kw: {kw}")
+                app_logger.error(
+                    f"数据抓取失败( pansearch 源，请考虑使用代理)，kw: {kw}"
+                )
 
             result = {
                 **UniResponse.SUCCESS,
                 **{
                     ResponseField.DATA: {
                         "total": len(target_data),
-                        "data": target_data,
+                        "rows": target_data,
                     }
                 },
             }

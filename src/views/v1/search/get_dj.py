@@ -4,7 +4,6 @@
     Changelog: all notable changes to this file will be documented
 """
 
-
 from flask import current_app, request
 
 from src.collector import dj_spider
@@ -91,7 +90,7 @@ def get_dj():
                 **{
                     ResponseField.DATA: {
                         "total": len(target_data),
-                        "data": target_data,
+                        "rows": target_data,
                     }
                 },
             }

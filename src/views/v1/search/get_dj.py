@@ -80,10 +80,9 @@ def get_dj():
                                 "res_dict": res_dict,
                             }
                         )
-
             else:
-                # 数据抓取失败
-                app_logger.error(f"数据抓取失败(dj 源，请考虑使用代理)，kw: {kw}")
+                # 数据抓取为空
+                app_logger.error(f"数据抓取为空，kw: {kw}")
 
             result = {
                 **UniResponse.SUCCESS,

@@ -82,8 +82,8 @@ def get_kk():
                                 }
                             )
             else:
-                # 数据抓取失败
-                app_logger.error(f"数据抓取失败(kk 源，请考虑使用代理)，kw: {kw}")
+                # 数据抓取为空
+                app_logger.error(f"数据抓取为空，kw: {kw}")
 
             result = {
                 **UniResponse.SUCCESS,

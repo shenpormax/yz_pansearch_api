@@ -13,6 +13,7 @@ def get_dj_data(kw: str, proxy_model: int = 0) -> str:
     """
     获取token
     """
+    LOGGER.info(f"DJ Spider 请求 soju.ee 资源通道")
     headers = {
         **data_config.SPIDER_CONFIG["REQUEST_HEADERS"],
         **{"Content-Type": "application/json"},

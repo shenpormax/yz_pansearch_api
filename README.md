@@ -15,10 +15,7 @@
 直接基于 Docker 部署：
 
 ```shell
-docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped \
--e APP_TOKEN=设置 token \
--e CACHE_TTL=604800 \
-howie6879/yz_pansearch_api:http-v0.1.0
+docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=604800 howie6879/yz_pansearch_api:http-v0.1.0
 ```
 
 环境变量解释：
@@ -33,7 +30,9 @@ howie6879/yz_pansearch_api:http-v0.1.0
 - dj: 短剧为主
 - 更多资源可提交 PR 兼容
 
-启动成功后，通过 `http://ip:8067`，curl 的请求示例如下：
+启动成功后，通过浏览器访问 `http://ip:8067`，出现：Not Found 说明启动成功，如果无法访问，请检查服务器防火墙端口是否开放。
+
+终端 curl 的请求示例如下：
 
 ```shell
 curl --request POST \
@@ -92,6 +91,13 @@ curl --request POST \
 关于如何集成到元站，进入**插件列表**，点击**全网搜**插件：
 
 ![全网搜案例](https://img.fre123.com/i/2024/10/24/671a4ea498e7f.png)
+
+请求头配置你需要填的：
+
+- Content-Type: application/json
+- APP-ID: yz_pansearch_api
+- APP-TOKEN: 你启动服务自己设置的 Token
+- PAN-TYPE: quark
 
 ## 开发
 

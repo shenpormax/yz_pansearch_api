@@ -13,6 +13,9 @@ def get_dj_data(kw: str, proxy_model: int = 0) -> str:
     """
     获取token
     """
+    LOGGER.info(
+        f"DJ Spider 请求 soju.ee 资源通道, kw: {kw} 是否使用代理: {proxy_model}"
+    )
     headers = {
         **data_config.SPIDER_CONFIG["REQUEST_HEADERS"],
         **{"Content-Type": "application/json"},
@@ -25,11 +28,10 @@ def get_dj_data(kw: str, proxy_model: int = 0) -> str:
         headers.update(
             data_config.SPIDER_CONFIG["SPIDER_PROXY_CONFIG"]["PROXY_HEADERS"]
         )
-        LOGGER.info("DJ Spider 使用代理获取数据")
     else:
         proxy = {}
     resp = send_get_request(
-        url=f"https://soju.ee/api/search?page_no=1&page_size=50&title={kw}",
+        url=f"https://soju.ee/api/search?page_no=1&page_size=10&title={kw}",
         headers=headers,
         req_session=REQ_SESSION,
         timeout=10,
@@ -49,5 +51,5 @@ def get_dj_data(kw: str, proxy_model: int = 0) -> str:
 if __name__ == "__main__":
     from pprint import pprint
 
-    res = get_dj_data(kw="机", proxy_model=1)
+    res = get_dj_data(kw="机", proxy_model=0)
     pprint(res)

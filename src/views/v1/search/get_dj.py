@@ -4,7 +4,6 @@
     Changelog: all notable changes to this file will be documented
 """
 
-
 from flask import current_app, request
 
 from src.collector import dj_spider
@@ -81,17 +80,16 @@ def get_dj():
                                 "res_dict": res_dict,
                             }
                         )
-
             else:
-                # 数据抓取失败
-                app_logger.error(f"数据抓取失败(dj 源，请考虑使用代理)，kw: {kw}")
+                # 数据抓取为空
+                app_logger.error(f"数据抓取为空，kw: {kw}")
 
             result = {
                 **UniResponse.SUCCESS,
                 **{
                     ResponseField.DATA: {
                         "total": len(target_data),
-                        "data": target_data,
+                        "rows": target_data,
                     }
                 },
             }

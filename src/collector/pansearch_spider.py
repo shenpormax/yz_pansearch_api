@@ -25,24 +25,58 @@ def fetch_page_data(url, headers, proxy: None):
         return {"err_msg": str(e)}
 
 
-def parse_page_data(html_content):
+def parse_page_data(kw, html_content):
     """使用 lxml 解析网页内容并提取所需数据"""
     tree = html.fromstring(html_content)
     items = tree.xpath('//div[@class="whitespace-pre-wrap break-all"]')
     data_list = []
+    url_list = []
     for item in items:
-        title = (
-            re.search(r"名称：(.*?)\n", item.text_content()).group(1).strip()
-            if re.search(r"名称：(.*?)\n", item.text_content())
-            else None
-        )
-        description = (
-            re.search(r"描述：(.*?)\n", item.text_content()).group(1).strip()
-            if re.search(r"描述：(.*?)\n", item.text_content())
-            else None
-        )
-        url = item.xpath(".//a/@href")[0]
-        data_list.append({"title": title, "description": description, "url": url})
+        url = item.xpath(".//a/@href")
+        if len(url) == 1 and url[0] not in url_list:
+            url = url[0]
+            title = (
+                re.search(r"名称：(.*?)\n", item.text_content()).group(1).strip()
+                if re.search(r"名称：(.*?)\n", item.text_content())
+                else ""
+            )
+            description = (
+                re.search(r"描述：(.*?)\n", item.text_content()).group(1).strip()
+                if re.search(r"描述：(.*?)\n", item.text_content())
+                else ""
+            )
+
+            data_list.append(
+                {
+                    "title": title,
+                    "description": description,
+                    "url": url,
+                }
+            )
+            url_list.append(url)
+        else:
+            text = item.text_content().strip()
+            # 正则表达式匹配以数字开头并以分号结束的每一项
+            pattern = re.compile(r"(\d+、.*?):(https://.*?);")
+
+            # 查找所有匹配项
+            matches = pattern.findall(text)
+
+            keyword_ = kw
+
+            # 构建字典并过滤出包含关键字的项
+            result = [
+                {"title": re.sub(r"^\d+、", "", title), "link": link}
+                for title, link in matches
+                if keyword_ in title and link not in url_list
+            ]
+
+            for item in result:
+                url = item["link"]
+                data_list.append(
+                    {"title": item["title"], "description": "", "url": url}
+                )
+                url_list.append(url)
 
     return data_list
 
@@ -76,13 +110,13 @@ def run_spider(kw: str, proxy_model: int = 0):
         print(f"请求失败: {html_content['err_msg']}")
         return None
 
-    parsed_data = parse_page_data(html_content)
+    parsed_data = parse_page_data(kw, html_content)
     return parsed_data
 
 
 if __name__ == "__main__":
     from pprint import pprint
 
-    data = run_spider("斗罗大", proxy_model=1)
+    data = run_spider(kw="奥特", proxy_model=1)
     if data:
         pprint(data)

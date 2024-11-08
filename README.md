@@ -15,7 +15,7 @@
 直接基于 Docker 部署：
 
 ```shell
-docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=604800 howie6879/yz_pansearch_api:http-v0.1.0
+docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=360 howie6879/yz_pansearch_api:http-v0.1.0
 ```
 
 环境变量解释：
@@ -98,6 +98,18 @@ curl --request POST \
 - APP-ID: yz_pansearch_api
 - APP-TOKEN: 你启动服务自己设置的 Token
 - PAN-TYPE: quark
+
+## 更新
+
+请进入服务器终端，执行以下命令：
+
+```shell
+sudo docker stop yz_pansearch_api
+sudo docker rm yz_pansearch_api
+sudo docker pull howie6879/yz_pansearch_api:http-v0.1.0
+# APP_TOKEN CACHE_TTL 等环境变量需要和第一次启动时候设置成一样
+sudo docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=360 howie6879/yz_pansearch_api:http-v0.1.0
+```
 
 ## 开发
 

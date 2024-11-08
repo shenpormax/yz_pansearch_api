@@ -1,11 +1,11 @@
 meta {
-  name: get_kk
+  name: get_pansearch
   type: http
-  seq: 1
+  seq: 2
 }
 
 post {
-  url: {{api}}/v1/search/get_kk
+  url: {{api}}/v1/search/get_pansearch
   body: json
   auth: none
 }
@@ -20,6 +20,6 @@ headers {
 
 body:json {
   {
-    "kw": "功夫"
+    "kw": "奥特曼"
   }
 }

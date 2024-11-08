@@ -7,8 +7,6 @@
 import re
 import urllib.parse
 
-import requests
-
 from lxml import html
 
 from src.collector import REQ_SESSION, data_config
@@ -18,7 +16,7 @@ from src.config import LOGGER
 def fetch_page_data(url, headers, proxy: None):
     """发送 GET 请求并解析网页内容"""
     try:
-        response = requests.get(url, headers=headers, timeout=5, proxies=proxy)
+        response = REQ_SESSION.get(url, headers=headers, timeout=5, proxies=proxy)
         response.raise_for_status()
         return response.text
     except Exception as e:
@@ -117,6 +115,6 @@ def run_spider(kw: str, proxy_model: int = 0):
 if __name__ == "__main__":
     from pprint import pprint
 
-    data = run_spider(kw="奥特", proxy_model=1)
+    data = run_spider(kw="奥特曼", proxy_model=0)
     if data:
         pprint(data)

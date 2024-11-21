@@ -9,11 +9,17 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/http_app.py"
+      "dest": "src/http_app.py",
+      "timeout": 59
     }
   ],
   "env": {
     "APP_TOKEN": "yz_ai_cms",
     "CACHE_TTL": "360"
+  },
+  "functions": {
+    "/*": {
+      "maxDuration": 60
+    }
   }
 }

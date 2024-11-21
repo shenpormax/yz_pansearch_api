@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/http_app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/http_app.py"
+    }
+  ],
+  "env": {
+    "APP_TOKEN": "yz_ai_cms",
+    "CACHE_TTL": "360"
+  }
+}

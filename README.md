@@ -15,13 +15,16 @@
 直接基于 Docker 部署：
 
 ```shell
-docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=360 howie6879/yz_pansearch_api:http-v0.1.0
+sudo docker run -d -p 8067:8067 --name yz_pansearch_api --restart unless-stopped -e APP_TOKEN=your_token -e CACHE_TTL=360 howie6879/yz_pansearch_api:http-v0.1.0
+
+# 重启
+sudo docker restart yz_pansearch_api
 ```
 
 环境变量解释：
 
 - APP_TOKEN：搭建完成后你自己访问的密钥 Token，根据自己喜好填写
-- CACHE_TTL：缓存时间，单位秒，默认 604800 秒（7 天）
+- CACHE_TTL：缓存时间，单位秒，默认 360 秒
 
 目前支持的源有：
 

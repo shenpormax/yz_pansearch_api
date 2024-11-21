@@ -5,7 +5,7 @@ s_env=$2
 
 if [ ${s_type} == "api" ]
 then
-    script_command="pipenv run gunicorn -c src/config/gunicorn.py src.http_app:app"
+    script_command="pipenv run gunicorn -c src/config/gunicorn.py api.http_app:app"
 else
     echo "Service type doesn't exist: "$s_type
     exit

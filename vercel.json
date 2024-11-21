@@ -9,8 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/http_app.py",
-      "timeout": 59
+      "dest": "src/http_app.py"
     }
   ],
   "env": {

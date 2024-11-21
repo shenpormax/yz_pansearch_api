@@ -1,10 +1,10 @@
 {
   "functions": {
-    "src/http_app.py": {
+    "api/http_app.py": {
       "maxDuration": 60
     }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/src/http_app" }],
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/http_app" }],
   "env": {
     "APP_TOKEN": "yz_ai_cms",
     "CACHE_TTL": "360"

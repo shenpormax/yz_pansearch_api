@@ -25,7 +25,7 @@ class Config:
     HTTP_PORT = os.getenv("HTTP_PORT", 8067)
     WORKERS = os.getenv("WORKERS", 1)
 
-    APP_ID_CONFIG = {"yz_pansearch_api": os.getenv("APP_TOKEN", "123456")}
+    APP_ID_CONFIG = {"yz_pansearch_api": os.getenv("APP_TOKEN", "yz_ai_cms")}
     DOMAIN_NAME_MAP = {
         "quark": "夸克",
         "baidu": "百度",
@@ -40,7 +40,7 @@ class Config:
         ).split(";"),
     }
     CACHE_DATA = {}
-    CACHE_TTL = int(os.getenv("CACHE_TTL", 604800))
+    CACHE_TTL = int(os.getenv("CACHE_TTL", 360))
 
     TAG = {
         "info": f"{PROJECT_NAME.replace('_', '-')}-info",

@@ -42,15 +42,11 @@ def create_app():
 
     # 注册相关蓝图
     flask_app.register_blueprint(bp_api)
-    cors = CORS(
+    _ = CORS(
         flask_app,
-        resources={
-            r"/v1/tools/proxy": {
-                "origins": "*",
-                "methods": ["GET", "POST"],
-                "allow_headers": ["Content-Type"],
-            }
-        },
+        resources={r"/v1/tools/*": {"origins": "*", "methods": ["GET", "POST"]}},
+        expose_headers="*",
+        supports_credentials=True,
     )
     return flask_app
 

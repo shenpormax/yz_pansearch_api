@@ -33,6 +33,11 @@ class Config:
         "alipan": "阿里",
         "aliyundrive": "阿里",
     }
+    ALLOWED_CORS_DOMAINS = (
+        str(os.getenv("ALLOWED_CORS_DOMAINS", "")).split(";")
+        if str(os.getenv("ALLOWED_CORS_DOMAINS", ""))
+        else []
+    )
     SOURCE_CONFIG = {
         "kk": os.getenv(
             "SOURCE_KK",

@@ -8,6 +8,7 @@
 import requests
 
 from flask import Flask
+from flask_cors import CORS
 
 from src.config import LOGGER, Config
 from src.views import bp_api
@@ -41,6 +42,16 @@ def create_app():
 
     # 注册相关蓝图
     flask_app.register_blueprint(bp_api)
+    cors = CORS(
+        flask_app,
+        resources={
+            r"/v1/tools/proxy": {
+                "origins": "*",
+                "methods": ["GET", "POST"],
+                "allow_headers": ["Content-Type"],
+            }
+        },
+    )
     return flask_app
 
 

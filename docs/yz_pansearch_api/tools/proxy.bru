@@ -1,0 +1,15 @@
+meta {
+  name: proxy
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{api}}/v1/tools/proxy?url=https://weekly.howie6879.com/rss/rss.xml
+  body: none
+  auth: none
+}
+
+params:query {
+  url: https://weekly.howie6879.com/rss/rss.xml
+}

@@ -22,5 +22,5 @@ bp_api.add_url_rule(
 bp_api.add_url_rule(
     f"{version}/tools/proxy",
     view_func=proxy,
-    methods=["GET, POST, OPTIONS, PUT, DELETE"],
+    methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
 )

@@ -20,7 +20,7 @@ def create_app():
     """
     flask_app = Flask(__name__)
 
-    @app.after_request
+    @flask_app.after_request
     def add_cors_headers(response):
         # 设置允许的源（可以改为具体的域名，而非 *）
         response.headers["Access-Control-Allow-Origin"] = "*"

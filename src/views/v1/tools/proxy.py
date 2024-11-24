@@ -31,6 +31,8 @@ def proxy():
     """
     代理接口，开放
     """
+    if request.method == "OPTIONS":
+        return "", 200
     # 获取目标URL
     target_url = request.args.get("url")
 
@@ -44,7 +46,7 @@ def proxy():
     try:
         # 构建请求头，移除一些敏感header
         headers = dict(request.headers)
-        headers.pop("Host", None)
+        headers["Host"] = urlparse(target_url).netloc
         headers.pop("If-None-Match", None)
         # headers.update({"Cache-Control": "no-cache"})
 
@@ -70,8 +72,6 @@ def proxy():
             for (name, value) in resp.raw.headers.items()
             if name.lower() not in excluded_headers
         ]
-
-        print(resp.content, resp.status_code, headers)
 
         return Response(resp.content, resp.status_code, headers)
 

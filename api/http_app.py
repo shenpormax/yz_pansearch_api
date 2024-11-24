@@ -21,6 +21,13 @@ def create_app():
     """
     flask_app = Flask(__name__)
 
+    CORS(
+        flask_app,
+        resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"]}},
+        expose_headers="*",
+        supports_credentials=True,
+    )
+
     with flask_app.app_context():
         # 项目内部配置
         flask_app.config["app_config"] = Config
@@ -42,12 +49,7 @@ def create_app():
 
     # 注册相关蓝图
     flask_app.register_blueprint(bp_api)
-    _ = CORS(
-        flask_app,
-        resources={r"/v1/tools/*": {"origins": "*", "methods": ["GET", "POST"]}},
-        expose_headers="*",
-        supports_credentials=True,
-    )
+
     return flask_app
 
 

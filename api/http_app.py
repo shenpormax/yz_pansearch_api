@@ -22,14 +22,17 @@ def create_app():
 
     @flask_app.after_request
     def add_cors_headers(response):
-        # 设置允许的源（可以改为具体的域名，而非 *）
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = (
-            "GET, POST, OPTIONS, PUT, DELETE"
-        )
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-        if request.method == "OPTIONS":
-            response.headers["Access-Control-Max-Age"] = "3600"
+        # 限制 /v1/tools/proxy 才能跨域
+        if request.path == "/v1/tools/proxy":
+            response.headers["Access-Control-Allow-Origin"] = "*"
+            response.headers["Access-Control-Allow-Methods"] = (
+                "GET, POST, OPTIONS, PUT, DELETE"
+            )
+            response.headers["Access-Control-Allow-Headers"] = (
+                "Content-Type, Authorization"
+            )
+            if request.method == "OPTIONS":
+                response.headers["Access-Control-Max-Age"] = "3600"
         return response
 
     with flask_app.app_context():

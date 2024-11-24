@@ -8,4 +8,3 @@ Jinja2==3.1.2
 requests
 redis
 lxml
-flask-cors

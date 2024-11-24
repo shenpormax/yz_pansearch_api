@@ -20,5 +20,7 @@ bp_api.add_url_rule(
     f"{version}/search/get_pansearch", view_func=get_pansearch, methods=["POST"]
 )
 bp_api.add_url_rule(
-    f"{version}/tools/proxy", view_func=proxy, methods=["GET", "POST", "OPTIONS"]
+    f"{version}/tools/proxy",
+    view_func=proxy,
+    methods=["GET, POST, OPTIONS, PUT, DELETE"],
 )

@@ -7,7 +7,7 @@
 from flask import Blueprint
 
 from src.views.v1.ping import ping
-from src.views.v1.search import get_dj, get_kk, get_pansearch
+from src.views.v1.search import get_dj, get_dj2, get_kk, get_pansearch
 from src.views.v1.tools.proxy import proxy
 
 bp_api = Blueprint("bp_api", __name__)

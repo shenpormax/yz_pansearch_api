@@ -1,7 +1,7 @@
 """
-    Created by fre123 at 2024-10-11.
-    Description: 获取 pansearch 资源
-    Changelog: all notable changes to this file will be documented
+Created by fre123 at 2024-10-11.
+Description: 获取 pansearch 资源
+Changelog: all notable changes to this file will be documented
 """
 
 from flask import current_app, request
@@ -28,7 +28,7 @@ def get_pansearch():
     is_cache = request.headers.get("IS-CACHE", "1")
     # 默认提取夸克链接
     pan_type = request.headers.get("PAN-TYPE", "quark")
-    check_pan_url = request.headers.get("CHECK-PAN-URL", "1")
+    check_pan_url = request.headers.get("CHECK-PAN-URL", "0")
     pan_type_list = pan_type.lower().strip().split(";")
 
     # 获取基础数据

@@ -1,7 +1,8 @@
 """
-    Created by fre123 at 2024-09-11.
-    Description: http://z.kkkob.com/app/index.html 抓取数据
-    Changelog: all notable changes to this file will be documented
+Created by fre123 at 2024-09-11.
+Description: http://z.kkkob.com/app/index.html 抓取数据
+    pipenv run python src/collector/kk_spider.py
+Changelog: all notable changes to this file will be documented
 """
 
 import concurrent.futures

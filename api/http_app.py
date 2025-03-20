@@ -1,8 +1,8 @@
 """
-    Created by fre123 at 2024-10-11.
-    Description: 项目HTTP启动文件
-        - 启动: pipenv run python ./src/http_app.py
-    Changelog: all notable changes to this file will be documented
+Created by fre123 at 2024-10-11.
+Description: 项目HTTP启动文件
+    - 启动: pipenv run python ./api/http_app.py
+Changelog: all notable changes to this file will be documented
 """
 
 import requests

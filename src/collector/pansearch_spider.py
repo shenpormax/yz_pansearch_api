@@ -1,7 +1,8 @@
 """
-    Created by lrh at 2024-10-28.
-    Description: https://www.pansearch.me/search?keywo 爬虫脚本
-    Changelog: all notable changes to this file will be documented
+Created by lrh at 2024-10-28.
+Description: https://www.pansearch.me/search?keywo 爬虫脚本
+    pipenv run python src/collector/pansearch_spider.py
+Changelog: all notable changes to this file will be documented
 """
 
 import re

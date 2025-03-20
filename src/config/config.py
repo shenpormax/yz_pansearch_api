@@ -1,7 +1,7 @@
 """
-    Created by fre123 at 2024-10-11.
-    Description: 项目整体配置文件
-    Changelog: all notable changes to this file will be documented
+Created by fre123 at 2024-10-11.
+Description: 项目整体配置文件
+Changelog: all notable changes to this file will be documented
 """
 
 import os
@@ -41,7 +41,7 @@ class Config:
     SOURCE_CONFIG = {
         "kk": os.getenv(
             "SOURCE_KK",
-            "http://www.kkkob.com;http://m.kkkob.com;http://p.kkkob.com;http://qq.kkkob.com;http://r.kkkob.com;http://s.kkkob.com;http://x.kkkob.com;http://y.kkkob.com;http://z.kkkob.com;http://m.kkqws.com",
+            "http://www.kkkob.com;http://m.kkkob.com;http://p.kkkob.com;http://qq.kkkob.com;http://r.kkkob.com;http://s.kkkob.com;http://x.kkkob.com;http://y.kkkob.com;http://z.kkkob.com",
         ).split(";"),
     }
     CACHE_DATA = {}

@@ -36,7 +36,7 @@ def get_token(token_url: str, proxy_model: int = 0) -> str:
         url=f"{token_url}/v/api/getToken",
         headers=headers,
         req_session=REQ_SESSION,
-        timeout=10,
+        timeout=3,
         proxies=proxy,
     )
     if resp["resp_status"]:
@@ -85,7 +85,7 @@ def get_kk_data(kw: str, kk_url, kk_channel: str, proxy_model: int = 0) -> dict:
         headers=headers,
         data=data,
         req_session=REQ_SESSION,
-        timeout=10,
+        timeout=3,
         proxies=proxy,
     )
     if resp["resp_status"]:
@@ -133,5 +133,5 @@ def start(kw: str, proxy_model: int = 0) -> dict:
 
 
 if __name__ == "__main__":
-    res = start(kw="边水往事", proxy_model=0)
+    res = start(kw="北上", proxy_model=0)
     print(res)

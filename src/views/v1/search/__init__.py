@@ -8,3 +8,4 @@ from .get_dj import get_dj
 from .get_dj2 import get_dj2
 from .get_kk import get_kk
 from .get_pansearch import get_pansearch
+from .get_xxq import get_xxq

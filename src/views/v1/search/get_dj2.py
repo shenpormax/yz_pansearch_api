@@ -7,7 +7,7 @@
 from flask import current_app, request
 
 from src.collector import dj2_spider
-from src.common import ResponseField, UniResponse, response_handle, token_required
+from src.common import ResponseField, UniResponse, response_handle
 from src.config import LOGGER, Config
 from src.logic.cache_tools import get_cache, set_cache
 from src.logic.pan_baidu_tools import get_baidu_url_by_txt
@@ -47,7 +47,6 @@ def get_dj2():
         else:
             spider_data = dj2_spider.get_dj2_data(kw, proxy_model)
             target_data = []
-            print(spider_data)
             if spider_data:
                 for res in spider_data:
                     res_dict = {}

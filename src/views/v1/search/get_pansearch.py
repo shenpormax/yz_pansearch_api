@@ -82,9 +82,7 @@ def get_pansearch():
                         )
             else:
                 # 数据抓取失败
-                app_logger.error(
-                    f"数据抓取失败( pansearch 源，请考虑使用代理)，kw: {kw}"
-                )
+                app_logger.error(f"数据抓取失败( pansearch 源，请考虑使用代理)，kw: {kw}")
 
             result = {
                 **UniResponse.SUCCESS,

@@ -7,7 +7,7 @@ Changelog: all notable changes to this file will be documented
 from flask import Blueprint
 
 from src.views.v1.ping import ping
-from src.views.v1.search import get_dj_3v, get_kk, get_pansearch
+from src.views.v1.search import get_dj_3v, get_kk, get_pansearch, get_xxq
 from src.views.v1.tools.proxy import proxy
 
 bp_api = Blueprint("bp_api", __name__)
@@ -19,6 +19,7 @@ bp_api.add_url_rule(f"{version}/search/get_dj", view_func=get_dj_3v, methods=["P
 bp_api.add_url_rule(
     f"{version}/search/get_pansearch", view_func=get_pansearch, methods=["POST"]
 )
+bp_api.add_url_rule(f"{version}/search/get_xxq", view_func=get_xxq, methods=["POST"])
 bp_api.add_url_rule(
     f"{version}/tools/proxy",
     view_func=proxy,

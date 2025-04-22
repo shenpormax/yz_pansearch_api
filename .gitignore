@@ -133,3 +133,4 @@ dmypy.json
 dev.env
 *.xlsx
 deploy.sh
+.history/

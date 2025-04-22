@@ -1,13 +1,13 @@
 """
-    Created by fre123 at 2024-12-08.
-    Description: 获取 dj2 资源
-    Changelog: all notable changes to this file will be documented
+Created by fre123 at 2024-12-08.
+Description: 获取 dj2 资源
+Changelog: all notable changes to this file will be documented
 """
 
 from flask import current_app, request
 
-from src.collector import dj2_spider
-from src.common import ResponseField, UniResponse, response_handle
+from src.collector import dj_spider_3v
+from src.common import ResponseField, UniResponse, response_handle, token_required
 from src.config import LOGGER, Config
 from src.logic.cache_tools import get_cache, set_cache
 from src.logic.pan_baidu_tools import get_baidu_url_by_txt
@@ -15,8 +15,8 @@ from src.logic.pan_quark_tools import get_quark_url_by_txt, get_share_url_token
 from src.utils import md5_encryption
 
 
-# @token_required()
-def get_dj2():
+@token_required()
+def get_dj_3v():
     """
     dj2 资源测试接口
     """
@@ -28,7 +28,7 @@ def get_dj2():
     is_cache = request.headers.get("IS-CACHE", "1")
     # 默认提取夸克链接
     pan_type = request.headers.get("PAN-TYPE", "quark")
-    check_pan_url = request.headers.get("CHECK-PAN-URL", "1")
+    check_pan_url = request.headers.get("CHECK-PAN-URL", "0")
     pan_type_list = pan_type.lower().strip().split(";")
 
     # 获取基础数据
@@ -45,7 +45,7 @@ def get_dj2():
         if redis_data:
             result = redis_data
         else:
-            spider_data = dj2_spider.get_dj2_data(kw, proxy_model)
+            spider_data = dj_spider_3v.get_dj_data(kw, proxy_model)
             target_data = []
             if spider_data:
                 for res in spider_data:

@@ -55,10 +55,9 @@ def get_kk_data(kw: str, kk_url, kk_channel: str, proxy_model: int = 0) -> dict:
         token = token or get_token(token_url=kk_url, proxy_model=1)
 
     kk_channel_map = {
-        "kk": f"{kk_url}/v/api/search",
-        "xy": f"{kk_url}/v/api/getXiaoyu",
-        "dj": f"{kk_url}/v/api/getDJ",
         "jz": f"{kk_url}/v/api/getJuzi",
+        "tt": f"{kk_url}/v/api/getTTZJB",
+        "df": f"{kk_url}/v/api/getDyfx",
     }
     headers = {
         **data_config.SPIDER_CONFIG["REQUEST_HEADERS"],
@@ -94,9 +93,7 @@ def get_kk_data(kw: str, kk_url, kk_channel: str, proxy_model: int = 0) -> dict:
         else:
             # 抓取成功，但是目标服务器返回失败，考虑使用代理抓取
             result = {}
-            LOGGER.error(
-                f"KK Spider 请求 {kk_channel} 资源通道成功，但结果不对: {resp['resp_data']}"
-            )
+            LOGGER.error(f"KK Spider 请求 {kk_channel} 资源通道成功，但结果不对: {resp['resp_data']}")
     else:
         result = {}
         LOGGER.error(f"KK Spider 请求 {kk_channel} 资源通道失败: {resp['resp_data']}")
@@ -117,7 +114,7 @@ def start(kw: str, proxy_model: int = 0) -> dict:
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = []
             LOGGER.info(f"KK Spider 请求 {kk_url} 资源通道")
-            for kk_channel in ["kk", "xy", "jz"]:
+            for kk_channel in ["jz", "tt", "df"]:
                 futures.append(
                     executor.submit(get_kk_data, kw, kk_url, kk_channel, proxy_model)
                 )

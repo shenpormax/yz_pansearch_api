@@ -41,7 +41,7 @@ class Config:
     SOURCE_CONFIG = {
         "kk": os.getenv(
             "SOURCE_KK",
-            "http://www.kkkob.com;http://m.kkkob.com;http://p.kkkob.com;http://qq.kkkob.com;http://r.kkkob.com;http://s.kkkob.com;http://x.kkkob.com;http://y.kkkob.com;http://z.kkkob.com",
+            "http://mmkk3.cn",
         ).split(";"),
     }
     CACHE_DATA = {}

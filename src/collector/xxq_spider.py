@@ -88,7 +88,11 @@ def get_xxq_data(kw: str, xxq_url, xxq_channel: str, proxy_model: int = 0) -> di
     )
     if resp["resp_status"]:
         if resp["resp_data"].get("us", False):
-            result = {xxq_channel: resp["resp_data"]["list"]}
+            res_list = resp["resp_data"]["list"]
+            for item in res_list:
+                if not item.get("question", ""):
+                    item["question"] = item.get("answer", "").split("\n")[0]
+            result = {xxq_channel: res_list}
         else:
             # 抓取成功，但是目标服务器返回失败，考虑使用代理抓取
             result = {}
@@ -123,5 +127,7 @@ def start(kw: str, proxy_model: int = 0) -> dict:
 
 
 if __name__ == "__main__":
-    res = start(kw="边水往事", proxy_model=0)
-    print(res)
+    from pprint import pprint
+
+    res = start(kw="七宗罪", proxy_model=0)
+    pprint(res)

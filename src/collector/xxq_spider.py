@@ -1,7 +1,7 @@
 """
-    Created by  ssy at 2025-04-11.
-    Description: http://so1.l71.top 抓取数据
-    Changelog: all notable changes to this file will be documented
+Created by  ssy at 2025-04-11.
+Description: http://so1.l71.top 抓取数据
+Changelog: all notable changes to this file will be documented
 """
 
 import concurrent.futures
@@ -77,7 +77,9 @@ def get_xxq_data(kw: str, xxq_url, xxq_channel: str, proxy_model: int = 0) -> di
     else:
         proxy = {}
     data = {"name": kw, "token": token}
-    LOGGER.info(f"XXQ Spider 请求 {xxq_channel} 资源通道: {xxq_channel_map[xxq_channel]}")
+    LOGGER.info(
+        f"XXQ Spider 请求 {xxq_channel} 资源通道: {xxq_channel_map[xxq_channel]}"
+    )
     resp = send_post_request(
         url=xxq_channel_map[xxq_channel],
         headers=headers,
@@ -87,7 +89,7 @@ def get_xxq_data(kw: str, xxq_url, xxq_channel: str, proxy_model: int = 0) -> di
         proxies=proxy,
     )
     if resp["resp_status"]:
-        if resp["resp_data"].get("us", False):
+        if resp["resp_data"].get("list"):
             res_list = resp["resp_data"]["list"]
             for item in res_list:
                 if not item.get("question", ""):

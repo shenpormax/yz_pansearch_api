@@ -88,12 +88,14 @@ def get_kk_data(kw: str, kk_url, kk_channel: str, proxy_model: int = 0) -> dict:
         proxies=proxy,
     )
     if resp["resp_status"]:
-        if resp["resp_data"].get("us", False):
+        if resp["resp_data"].get("list", []):
             result = {kk_channel: resp["resp_data"]["list"]}
         else:
             # 抓取成功，但是目标服务器返回失败，考虑使用代理抓取
             result = {}
-            LOGGER.error(f"KK Spider 请求 {kk_channel} 资源通道成功，但结果不对: {resp['resp_data']}")
+            LOGGER.error(
+                f"KK Spider 请求 {kk_channel} 资源通道成功，但结果不对: {resp['resp_data']}"
+            )
     else:
         result = {}
         LOGGER.error(f"KK Spider 请求 {kk_channel} 资源通道失败: {resp['resp_data']}")

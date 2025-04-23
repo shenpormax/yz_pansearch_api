@@ -31,6 +31,7 @@ sudo docker restart yz_pansearch_api
 - kk: 偏向最新剧集更新
 - pansearch: 资源比较齐全
 - dj: 短剧为主
+- xxq: 资源比较齐全
 - 更多资源可提交 PR 兼容
 
 启动成功后，通过浏览器访问 `http://ip:8067`，出现：Not Found 说明启动成功，如果无法访问，请检查服务器防火墙端口是否开放。

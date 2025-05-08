@@ -76,7 +76,7 @@ def get_xxq():
                         if res_dict:
                             target_data.append(
                                 {
-                                    "title": res.get("question", ""),
+                                    "title": res.get("question", kw),
                                     "description": "",
                                     "res_dict": res_dict,
                                 }

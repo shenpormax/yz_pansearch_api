@@ -75,7 +75,7 @@ def get_pansearch():
                     if res_dict:
                         target_data.append(
                             {
-                                "title": res.get("title", ""),
+                                "title": res.get("title", kw),
                                 "description": res.get("description", ""),
                                 "res_dict": res_dict,
                             }

@@ -72,10 +72,10 @@ def get_dj_3v():
                                 res_dict[each_pan_type] = baidu_url_list
                         else:
                             pass
-                    if res_dict and res.get("question", ""):
+                    if res_dict:
                         target_data.append(
                             {
-                                "name": res.get("name", ""),
+                                "name": res.get("name", kw),
                                 "description": "",
                                 "res_dict": res_dict,
                             }

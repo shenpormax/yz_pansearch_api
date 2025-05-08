@@ -72,10 +72,10 @@ def get_pansearch():
                                 res_dict[each_pan_type] = baidu_url_list
                         else:
                             pass
-                    if res_dict and res.get("question", ""):
+                    if res_dict:
                         target_data.append(
                             {
-                                "title": res.get("title", ""),
+                                "title": res.get("title", kw),
                                 "description": res.get("description", ""),
                                 "res_dict": res_dict,
                             }

@@ -73,10 +73,10 @@ def get_xxq():
                                     res_dict[each_pan_type] = baidu_url_list
                             else:
                                 pass
-                        if res_dict and res.get("question", ""):
+                        if res_dict:
                             target_data.append(
                                 {
-                                    "title": res.get("question", ""),
+                                    "title": res.get("question", kw),
                                     "description": "",
                                     "res_dict": res_dict,
                                 }

@@ -76,7 +76,7 @@ def get_kk():
                         if res_dict:
                             target_data.append(
                                 {
-                                    "title": res.get("question", kw),
+                                    "title": res.get("question", kw) or kw,
                                     "description": "",
                                     "res_dict": res_dict,
                                 }

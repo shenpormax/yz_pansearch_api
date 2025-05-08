@@ -75,7 +75,7 @@ def get_dj_3v():
                     if res_dict:
                         target_data.append(
                             {
-                                "name": res.get("name", kw),
+                                "name": res.get("name", kw) or kw,
                                 "description": "",
                                 "res_dict": res_dict,
                             }

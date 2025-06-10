@@ -117,7 +117,7 @@ def start(kw: str, proxy_model: int = 0) -> dict:
         for xxq_channel in ["tt", "df", "jz"]:
             futures.append(
                 executor.submit(
-                    get_xxq_data, kw, "http://so1.l71.top", xxq_channel, proxy_model
+                    get_xxq_data, kw, "http://okkmm.com", xxq_channel, proxy_model
                 )
             )
         for future in concurrent.futures.as_completed(futures):

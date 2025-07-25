@@ -1,0 +1,25 @@
+meta {
+  name: get_soushuju
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{api}}/v1/search/get_soushuju
+  body: json
+  auth: none
+}
+
+headers {
+  APP-ID: yz_soushuju_api
+  APP-TOKEN: {{app-token}}
+  PAN-TYPE: baidu
+  CHECK-PAN-URL: 0
+  IS-CACHE: 1
+}
+
+body:json {
+  {
+    "kw": "法"
+  }
+}
